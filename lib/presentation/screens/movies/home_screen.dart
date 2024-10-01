@@ -3,6 +3,8 @@ import 'package:cinehub/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../config/helpers/human_formats.dart';
+
 class HomeScreen extends StatelessWidget {
 
   static const name = 'home-screen';
@@ -41,6 +43,9 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   @override
   Widget build(BuildContext context) {
 
+    final firstLoading = ref.watch(firstLoadingProvider);
+    if(firstLoading) return const FullScreenLoader();
+
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final slideShowMovies = ref.watch(moviesSlideshowProvider);
     final popularMovies= ref.watch(popularMoviesProvider);
@@ -48,6 +53,10 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final topRatedMovies = ref.watch(topRatedMoviesProvider);
 
     final colors = Theme.of(context).colorScheme;
+
+    // Obtener el mes actual en formato texto
+    final currentMonth = DateTime.now().month;
+    final currentMonthName = HumanFormats.monthName(currentMonth);
 
     return Container(
       color: colors.surfaceContainerLowest,
@@ -74,7 +83,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                     MovieHorizontalListview(
                       movies: nowPlayingMovies,
                       title: 'En cines',
-                      subTitle: 'Lunes 20',
+                      subTitle: 'Ahora mismo',
                       loadNextPage: () {
                         ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
                       },
@@ -83,7 +92,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                     MovieHorizontalListview(
                       movies: upcomingMovies,
                       title: 'Proximamente',
-                      subTitle: 'En este mes',
+                      subTitle: currentMonthName,
                       loadNextPage: () {
                         ref.read(upcomingMoviesProvider.notifier).loadNextPage();
                       },

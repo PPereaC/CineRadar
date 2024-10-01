@@ -10,5 +10,10 @@ class HumanFormats {
     ).format(number);
     return formatterNumber;
   }
+  
+  static String monthName(int month) {
+    final formatter = DateFormat('MMMM', 'es_ES');
+    return formatter.format(DateTime(2021, month));
+  }
 
 }

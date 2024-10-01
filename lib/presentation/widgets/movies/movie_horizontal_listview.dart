@@ -60,7 +60,7 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                return _Slide(movie: widget.movies[index],);
+                return FadeInRight(child: _Slide(movie: widget.movies[index],));
               },
             )
           )
@@ -83,7 +83,7 @@ class _Slide extends StatelessWidget {
     final textStyles = Theme.of(context).textTheme;
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -96,7 +96,7 @@ class _Slide extends StatelessWidget {
               child: Image.network(
                 movie.posterPath,
                 fit: BoxFit.cover,
-                width: 150,
+                height: 200,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress != null){
                     return const Padding(
@@ -158,7 +158,7 @@ class _Title extends StatelessWidget {
 
     return Container(
       padding: const EdgeInsets.only(top: 10),
-      margin: const EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 12),
       child: Row(
         children: [
 
