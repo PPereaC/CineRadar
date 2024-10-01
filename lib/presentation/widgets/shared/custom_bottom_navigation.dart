@@ -6,7 +6,11 @@ class CustomBottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final colors = Theme.of(context).colorScheme;
+
     return BottomNavigationBar(
+      backgroundColor: colors.surfaceContainerLowest,
       elevation: 0,
       items: const [
         BottomNavigationBarItem(

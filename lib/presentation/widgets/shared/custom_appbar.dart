@@ -8,7 +8,7 @@ class CustomAppbar extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final colors = Theme.of(context).colorScheme;
-    final titleStyle = Theme.of(context).textTheme.titleMedium;
+    final titleStyle = Theme.of(context).textTheme.titleLarge;
 
     return SafeArea(
       bottom: false,
@@ -19,9 +19,10 @@ class CustomAppbar extends StatelessWidget {
           child: Row(
             children: [
 
-              Icon(Icons.movie_outlined, color: colors.primary,),
+              // TODO: Cambiar por el logo de la app
+              Icon(Icons.movie_outlined, color: colors.primary, size: 28,),
 
-              const SizedBox(width: 5),
+              const SizedBox(width: 10),
               
               Text('CineHub', style: titleStyle,),
 

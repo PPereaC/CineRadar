@@ -20,22 +20,25 @@ class MoviesSlideshow extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
 
     //* Swiper de películas
-    return SizedBox(
-      height: 210,
-      width: double.infinity,
-      child: Swiper(
-        viewportFraction: 0.8,
-        scale: 0.9,
-        autoplay: true,
-        pagination: SwiperPagination(
-          margin: const EdgeInsets.only(top: 0),
-          builder: DotSwiperPaginationBuilder(
-            activeColor: colors.primary,
-            color: colors.secondary
-          )
+    return Container(
+      color: Colors.transparent,
+      child: SizedBox(
+        height: 210,
+        width: double.infinity,
+        child: Swiper(
+          viewportFraction: 0.8,
+          scale: 0.9,
+          autoplay: true,
+          pagination: SwiperPagination(
+            margin: const EdgeInsets.only(top: 0),
+            builder: DotSwiperPaginationBuilder(
+              activeColor: colors.primary,
+              color: colors.secondary
+            )
+          ),
+          itemCount: movies.length,
+          itemBuilder: (context, index) => _Slide(movie: movies[index] ),
         ),
-        itemCount: movies.length,
-        itemBuilder: (context, index) => _Slide(movie: movies[index] ),
       ),
     );
 
