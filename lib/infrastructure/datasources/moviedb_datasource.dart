@@ -6,6 +6,8 @@ import 'package:cinehub/infrastructure/mappers/movie_mapper.dart';
 import 'package:cinehub/infrastructure/models/moviedb/moviedb_response.dart';
 import 'package:dio/dio.dart';
 
+import '../models/moviedb/movie_details.dart';
+
 class MoviedbDatasource extends MoviesDatasource {
   
   final dio = Dio(BaseOptions(
@@ -70,6 +72,17 @@ class MoviedbDatasource extends MoviesDatasource {
     });
 
     return _jsonToMovies(response.data);
+  }
+  
+  @override
+  Future<Movie> getMovieById(String id) async {
+    final response = await dio.get('/movie/$id');
+    if (response.statusCode != 200) throw Exception('Error getting movie by id: $id');
+
+    final movieDB = MovieDetails.fromJson(response.data);
+    final Movie movie = MovieMapper.movieDetailsToEntity(movieDB);
+
+    return movie;
   }
 
 }
