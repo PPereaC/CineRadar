@@ -47,7 +47,7 @@ class _MovieHorizontalListviewState extends State<MovieHorizontalListview> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 350,
+      height: 370,
       child: Column(
         children: [
 
@@ -97,7 +97,7 @@ class _Slide extends StatelessWidget {
               child: Image.network(
                 movie.posterPath,
                 fit: BoxFit.cover,
-                height: 200,
+                height: 230,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress != null){
                     return const Padding(
@@ -125,6 +125,7 @@ class _Slide extends StatelessWidget {
               movie.title,
               maxLines: 2,
               style: textStyles.titleSmall,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
 
