@@ -5,3 +5,5 @@ export 'movies/movie_info_provider.dart';
 export 'movies/movies_providers.dart';
 export 'movies/movies_repository_provider.dart';
 export 'movies/movies_slideshow_provider.dart';
+export 'teasers/teasers_repository_provider.dart';
+export 'teasers/teasers_by_movie_provider.dart';
