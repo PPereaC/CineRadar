@@ -2,9 +2,11 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 import '../../../domain/entities/movie.dart';
 import '../../providers/providers.dart';
+import '../../widgets/widgets.dart';
 
 class MovieScreen extends ConsumerStatefulWidget {
 
@@ -26,6 +28,7 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
     
     ref.read(movieInfoProvider.notifier).loadMovie(widget.movieId);
     ref.read(actorsByMovieProvider.notifier).loadActors(widget.movieId);
+    ref.read(teasersByMovieProvider.notifier).loadTeasers(widget.movieId);
 
   }
 
@@ -208,6 +211,118 @@ class _ActorsByMovie extends ConsumerWidget {
   }
 }
 
+class _TeasersByMovie extends ConsumerWidget {
+
+  final String movieId;
+
+  const _TeasersByMovie({required this.movieId});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref){
+    final teasersByMovie = ref.watch(teasersByMovieProvider);
+
+    if (teasersByMovie[movieId] == null) {
+      return const Center(child: CircularProgressIndicator(strokeWidth: 2));
+    }
+
+    final teasers = teasersByMovie[movieId]!;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+
+        if (teasers.isNotEmpty)
+          // Título de la sección
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 3),
+            child: Text(
+              'Trailers',
+              style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        
+        if (teasers.isNotEmpty)
+          // Lista de teasers con pre visualización de video
+          SizedBox(
+            height: 170,
+            child: ListView.builder(
+              padding: const EdgeInsets.all(5),
+              scrollDirection: Axis.horizontal,
+              itemCount: teasers.length,
+              itemBuilder: (context, index) {
+                final teaser = teasers[index];
+                return GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => TeaserDialog(videoKey: teaser.key),
+                    );
+                  },
+                  child: Container(
+                    width: 250,
+                    margin: const EdgeInsets.only(right: 8),
+                    child: Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.network(
+                            'https://img.youtube.com/vi/${teaser.key}/hqdefault.jpg',
+                            height: double.infinity,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Positioned.fill(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: Colors.black.withOpacity(0.3),
+                            ),
+                            child: Center(
+                              child: Icon(
+                                Iconsax.play_circle_outline,
+                                size: 40,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 5,
+                          left: 10,
+                          right: 10,
+                          child: Text(
+                            teaser.name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+
+        if (teasers.isNotEmpty)
+          const SizedBox(height: 10),
+
+      ],
+    );
+
+  }
+
+}
+
 class _MovieDetails extends StatelessWidget {
   final Movie movie;
 
@@ -270,7 +385,7 @@ class _MovieDetails extends StatelessWidget {
 
             // Géneros
             SizedBox(
-              height: 40, // Ajusta la altura según sea necesario
+              height: 40,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
@@ -292,14 +407,16 @@ class _MovieDetails extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 10),
 
             // Mostrar actores con título
             _ActorsByMovie(movieId: movie.id.toString()),
 
-            const SizedBox(height: 32),
+            const SizedBox(height: 10),
 
-            
+            // Mostrar teasers con título
+            _TeasersByMovie(movieId: movie.id.toString()),
+
           ],
         ),
       ),
