@@ -1,8 +1,10 @@
 import 'package:cinehub/presentation/delegates/search_movie_delegate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 
+import '../../../domain/entities/movie.dart';
 import '../../providers/providers.dart';
 
 class CustomAppbar extends ConsumerWidget {
@@ -33,16 +35,21 @@ class CustomAppbar extends ConsumerWidget {
               const Spacer(),
 
               IconButton(
-                onPressed: () {
+                onPressed: () async {
 
                   final movieRepository = ref.read(movieRepositoryProvider);
 
-                  showSearch(
+                  final movie = await showSearch<Movie?>(
                     context: context,
                     delegate: SearchMovieDelegate(
                       searchMovies: movieRepository.searchMovies
                     )
                   );
+
+                  if (movie == null || !context.mounted) return;
+
+                  context.push('/movie/${movie.id}');
+
                 },
                 icon: const Icon(Iconsax.search_normal_outline)
               ),
