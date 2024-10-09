@@ -12,14 +12,16 @@ typedef SearchMoviesCallback = Future<List<Movie>> Function(String query);
 class SearchMovieDelegate extends SearchDelegate<Movie?> {
 
   final SearchMoviesCallback searchMovies;
-  final List<Movie> initialMovies;
+  List<Movie> initialMovies;
   StreamController<List<Movie>> debouncesMovies = StreamController.broadcast();
   Timer? _debounceTimer;
 
   SearchMovieDelegate({
     required this.searchMovies,
     required this.initialMovies
-  });
+  }): super(
+    searchFieldLabel: 'Buscar Películas'
+  );
 
   void clearStreams() {
     debouncesMovies.close();
@@ -31,8 +33,34 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
     }
     _debounceTimer = Timer(const Duration(milliseconds: 500), () async {
       final movies = await searchMovies(query);
+      initialMovies = movies;
       debouncesMovies.add(movies);
     });
+  }
+
+  Widget buildResultsAndSuggestions (BuildContext context) {
+    return Container(
+      color: Theme.of(context).colorScheme.surfaceContainerLowest,
+      child: StreamBuilder(
+        initialData: initialMovies,
+        stream: debouncesMovies.stream,
+        builder: (context, snapshot) {
+
+          final movies = snapshot.data ?? [];
+          return ListView.builder(
+            itemCount: movies.length,
+            itemBuilder: (context, index) => _MovieItem(
+              movie: movies[index],
+              onMovieSelected: (context, movie) {
+                clearStreams();
+                close(context, movie);
+              },
+            )
+          );
+
+        },
+      ),
+    );
   }
 
   @override
@@ -65,7 +93,9 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Text('BuildResults');
+
+    return buildResultsAndSuggestions(context);
+
   }
 
   @override
@@ -73,28 +103,9 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
 
     _onQueryChanged(query);
 
-    return Container(
-      color: Theme.of(context).colorScheme.surfaceContainerLowest,
-      child: StreamBuilder(
-        initialData: initialMovies,
-        stream: debouncesMovies.stream,
-        builder: (context, snapshot) {
-          final movies = snapshot.data ?? [];
-          return ListView.builder(
-            itemCount: movies.length,
-            itemBuilder: (context, index) => _MovieItem(
-              movie: movies[index],
-              onMovieSelected: (context, movie) {
-                clearStreams();
-                close(context, movie);
-              },
-            )
-          );
-        },
-      ),
-    );
-  }
+    return buildResultsAndSuggestions(context);
 
+  }
 }
 
 class _MovieItem extends StatelessWidget {
