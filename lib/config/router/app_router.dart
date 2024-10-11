@@ -1,32 +1,60 @@
 import 'package:cinehub/presentation/screens/screens.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../presentation/views/views.dart';
+
 final appRouter = GoRouter(
-  initialLocation: '/home/0',
+  initialLocation: '/',
   routes: [
 
-    GoRoute(
-      path: '/home/:page',
-      name: HomeScreen.name,
-      builder: (context, state) {
-        final pageIndex = (int.parse(state.pathParameters['page'] ?? '0'));
-        return HomeScreen(pageIndex: pageIndex);
-      },
-      routes: [
-        GoRoute(
-          path: 'movie/:id',
-          name: MovieScreen.name,
-          builder: (context, state) {
-            final movieId = state.pathParameters['id'] ?? 'no-id';
-            return MovieScreen(movieId: movieId);
-          }
-        ),
-      ]
-    ),
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) => HomeScreen(navigationShell: navigationShell),
+      branches: [
 
-    GoRoute(
-      path: '/',
-      redirect: (_, __) => '/home/0',
+        // Inicio
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/',
+              builder: (context, state) => const HomeView(),
+              routes: [
+                GoRoute(
+                  path: 'movie/:id',
+                  name: MovieScreen.name,
+                  builder: (context, state) {
+                    // Obtenemos el ID de la película a través de la ruta
+                    final movieID = state.pathParameters['id'] ?? 'no-id';
+                    return MovieScreen(movieId: movieID);
+                  },
+                )
+              ]
+            )
+          ]
+        ),
+
+        // Categorías
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/categories',
+              builder: (context, state) => const CategoriesView(),
+            )
+          ]
+        ),
+
+        // Favoritos
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: '/favorites',
+              builder: (context, state) => const FavoritesView(),
+            )
+          ]
+        )
+
+
+
+      ],
     )
 
   ]

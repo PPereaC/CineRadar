@@ -4,9 +4,9 @@ import 'package:icons_plus/icons_plus.dart';
 
 class CustomBottomNavigation extends StatelessWidget {
 
-  final int currentIndex;
+  final StatefulNavigationShell navigationShell;
 
-  const CustomBottomNavigation({super.key, required this.currentIndex});
+  const CustomBottomNavigation({super.key, required this.navigationShell});
 
   /// Navegar a la ruta correspondiente según el índice seleccionado
   /// 
@@ -14,18 +14,14 @@ class CustomBottomNavigation extends StatelessWidget {
   /// [index] Índice seleccionado
   void onItemTapped(BuildContext context, int index) {
 
-    // Navegar a la ruta correspondiente según el índice seleccionado
-    switch(index) {
-      case 0:
-        context.go('/home/0');
-        break;
-      case 1:
-        context.go('/home/1');
-        break;
-      case 2:
-        context.go('/home/2');
-        break;
-    }
+    /// Alternamos entre vistas mediante el método goBranch, este método
+    /// garantiza que se restaure el último estado de navegación para la
+    /// rama seleccionada.
+    navigationShell.goBranch(
+      index,
+      // Soporte para ir a la ubicación inicial de la rama.
+      initialLocation: index == navigationShell.currentIndex,
+    );
 
   }
 
@@ -37,7 +33,7 @@ class CustomBottomNavigation extends StatelessWidget {
     return BottomNavigationBar(
       backgroundColor: colors.surfaceContainerLowest,
       elevation: 0,
-      currentIndex: currentIndex,
+      currentIndex: navigationShell.currentIndex,
       onTap: (index) => onItemTapped(context, index),
       items: const [
         BottomNavigationBarItem(
