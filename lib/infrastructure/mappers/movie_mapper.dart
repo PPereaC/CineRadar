@@ -47,4 +47,21 @@ class MovieMapper {
     voteCount: movie.voteCount
   );
 
+  static Movie fromSqfliteMap(Map<String, dynamic> movie) => Movie(
+    adult: movie['adult'] == 1,
+    backdropPath: movie['backdropPath'],
+    genreIds: movie['genreIds'].split(','),
+    id: movie['id'],
+    originalLanguage: movie['originalLanguage'],
+    originalTitle: movie['originalTitle'],
+    overview: movie['overview'],
+    popularity: movie['popularity'],
+    posterPath: movie['posterPath'],
+    releaseDate: DateTime.parse(movie['releaseDate']),
+    title: movie['title'],
+    video: movie['video'] == 1,
+    voteAverage: movie['voteAverage'],
+    voteCount: movie['voteCount']
+  );
+
 }

@@ -1,18 +1,20 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../../../domain/entities/movie.dart';
+import '../../providers/providers.dart';
 
-class CustomSliverAppBar extends StatelessWidget {
+class CustomSliverAppBar extends ConsumerWidget {
 
   final Movie movie;
 
   const CustomSliverAppBar({super.key, required this.movie});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
 
     final size = MediaQuery.of(context).size;
 
@@ -23,7 +25,8 @@ class CustomSliverAppBar extends StatelessWidget {
       actions: [
         IconButton(
           onPressed: () {
-            
+            // Llamar al método toggleFavorite del provider
+            ref.watch(localStorageRepositoryProvider).toggleFavorite(movie);
           },
           icon: const Icon(Iconsax.heart_outline),
           // icon: const Icon(Iconsax.heart_bold, color: Colors.red),
