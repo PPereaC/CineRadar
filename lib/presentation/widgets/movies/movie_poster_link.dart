@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -12,12 +14,20 @@ class MoviePosterLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => context.push('/movie/${movie.id}'),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: FadeIn(
-          child: Image.network(movie.posterPath),
+
+    // Valor aleatorio para el delay de la animación
+    final random = Random();
+    final delay = Duration(milliseconds: random.nextInt(800));
+
+    return FadeInUp(
+      delay: delay,
+      child: GestureDetector(
+        onTap: () => context.push('/movie/${movie.id}'),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: FadeIn(
+            child: Image.network(movie.posterPath),
+          ),
         ),
       ),
     );
