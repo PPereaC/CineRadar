@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../providers/providers.dart';
 
@@ -40,26 +41,31 @@ class CategoriesViewState extends ConsumerState<CategoriesView> {
               itemCount: genres.length,
               itemBuilder: (context, index) {
                 final genre = genres[index];
-                return Card(
-                  elevation: 5,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Container(
-                      color: colors.secondaryContainer,
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            genre.name,
-                            style: TextStyle(
-                              fontSize: text.bodyLarge!.fontSize,
-                              fontWeight: FontWeight.bold,
-                              color: text.bodyLarge!.color,
+                return GestureDetector(
+                  onTap: () {
+                    context.go('/categories/${genre.id}/${genre.name}');
+                  },
+                  child: Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: Container(
+                        color: colors.secondaryContainer,
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              genre.name,
+                              style: TextStyle(
+                                fontSize: text.bodyLarge!.fontSize,
+                                fontWeight: FontWeight.bold,
+                                color: text.bodyLarge!.color,
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
                           ),
                         ),
                       ),

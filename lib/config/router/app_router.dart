@@ -38,6 +38,18 @@ final appRouter = GoRouter(
             GoRoute(
               path: '/categories',
               builder: (context, state) => const CategoriesView(),
+              routes: [
+                GoRoute(
+                  path: '/:categoryID/:categoryName',
+                  name: MoviesByGenreScreen.name,
+                  builder: (context, state) {
+                    // Obtenemos el ID del género a través de la ruta
+                    final genreID = state.pathParameters['categoryID'] ?? 'no-id';
+                    final genreName = state.pathParameters['categoryName'] ?? 'no-name';
+                    return MoviesByGenreScreen(genreId: int.parse(genreID), genreName: genreName);
+                  },
+                )
+              ]
             )
           ]
         ),
