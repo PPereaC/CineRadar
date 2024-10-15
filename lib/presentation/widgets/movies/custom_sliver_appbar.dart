@@ -7,6 +7,13 @@ import 'package:icons_plus/icons_plus.dart';
 import '../../../domain/entities/movie.dart';
 import '../../providers/providers.dart';
 
+final isFavoriteProvider = FutureProvider.family.autoDispose((ref, int movieId) {
+
+  final localStorageRepository = ref.watch(localStorageRepositoryProvider);
+
+  return localStorageRepository.isMovieFavorite(movieId); // [bool] Si está en favoritos
+});
+
 class CustomSliverAppBar extends ConsumerWidget {
 
   final Movie movie;
@@ -17,6 +24,7 @@ class CustomSliverAppBar extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
 
     final size = MediaQuery.of(context).size;
+    final isFavoriteFuture = ref.watch(isFavoriteProvider(movie.id));
 
     return SliverAppBar(
       backgroundColor: Colors.black,
@@ -26,10 +34,18 @@ class CustomSliverAppBar extends ConsumerWidget {
         IconButton(
           onPressed: () {
             // Llamar al método toggleFavorite del provider
-            ref.watch(localStorageRepositoryProvider).toggleFavorite(movie);
+            ref.watch(localStorageRepositoryProvider).toggleFavorite(movie).whenComplete(() {
+              // Invalidar el provider isFavoriteProvider para que se recargue
+              ref.invalidate(isFavoriteProvider(movie.id));
+            });
           },
-          icon: const Icon(Iconsax.heart_outline),
-          // icon: const Icon(Iconsax.heart_bold, color: Colors.red),
+          icon: isFavoriteFuture.when(
+            loading: () => CircularProgressIndicator(strokeWidth: 2),
+            data: (isFavorite) => isFavorite
+              ? const Icon(Iconsax.heart_bold, color: Colors.red)
+              : const Icon(Iconsax.heart_outline),
+            error: (_, __) => throw UnimplementedError(),
+          ),
         ),
       ],
       leading: IconButton(

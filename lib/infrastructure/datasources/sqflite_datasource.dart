@@ -8,9 +8,8 @@ import '../mappers/movie_mapper.dart';
 class SQFliteDatasource extends LocalStorageDatasource {
 
   Future<Database> openDB() async {
-
     var databasesPath = await getDatabasesPath();
-
+  
     // Construir la ruta completa de la base de datos
     String path = join(databasesPath, 'favorites_movies.db');
     
@@ -21,7 +20,7 @@ class SQFliteDatasource extends LocalStorageDatasource {
       onCreate: (db, version) async {
         await db.execute(
           '''
-          CREATE TABLE favMovies (
+          CREATE TABLE IF NOT EXISTS favMovies (
             id INTEGER PRIMARY KEY,
             adult INTEGER,
             backdropPath TEXT,
@@ -98,7 +97,7 @@ class SQFliteDatasource extends LocalStorageDatasource {
       // Si la película ya está en la base de datos, borrarla
       if (movies.isNotEmpty) {
         await db.delete(
-          'movies',
+          'favMovies',
           where: 'id = ?',
           whereArgs: [movie.id]
         );
