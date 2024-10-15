@@ -2,6 +2,7 @@ import 'package:cinehub/presentation/providers/providers.dart';
 import 'package:cinehub/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 class FavoritesView extends ConsumerStatefulWidget {
   const FavoritesView({super.key});
@@ -39,6 +40,24 @@ class FavoritesViewState extends ConsumerState<FavoritesView> {
   Widget build(BuildContext context) {
 
     final favoriteMovies = ref.watch(favoriteMoviesProvider).values.toList();
+
+    if (favoriteMovies.isEmpty) {
+
+      final colors = Theme.of(context).colorScheme;
+
+      return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+
+            Icon(Iconsax.heart_outline, size: 60, color: colors.primary),
+            Text('No tienes películas favoritas', style: TextStyle(color: colors.primary, fontSize: 20))
+
+          ],
+        ),
+      );
+    }
 
     return Scaffold(
       body: MovieMasonry(
