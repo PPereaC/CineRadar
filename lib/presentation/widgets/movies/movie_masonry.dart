@@ -55,10 +55,15 @@ class _MovieMasonryState extends State<MovieMasonry> {
         crossAxisCount: 3,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
-        itemCount: widget.movies.length,
+        itemCount: widget.movies.length + 1, // Añadimos un elemento extra para el espacio al final
         itemBuilder: (context, index) {
 
-          if ( index == 1) {
+          if (index == widget.movies.length) {
+            // Añadimos un espacio al final de la lista
+            return SizedBox(height: 80);
+          }
+
+          if (index == 1) {
             return Column(
               children: [
                 const SizedBox(height: 40),
