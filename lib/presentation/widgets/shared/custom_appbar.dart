@@ -13,7 +13,6 @@ class CustomAppbar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final titleStyle = Theme.of(context).textTheme.titleLarge;
     final isDarkModeActivated = ref.watch(themeNotifierProvider).isDarkmode;
 
     return SafeArea(
@@ -36,7 +35,16 @@ class CustomAppbar extends ConsumerWidget {
 
               const Spacer(),
               
-              Center(child: Text('CineHub', style: titleStyle,)),
+              Center(
+                child: Text(
+                  'CineRadar',
+                  style: TextStyle(
+                    color: isDarkModeActivated ? Colors.white : Colors.black,
+                    fontSize: 40,
+                    fontFamily: 'Titulo'
+                  ),
+                ),
+              ),
 
               const Spacer(),
 

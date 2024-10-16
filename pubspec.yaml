@@ -36,3 +36,8 @@ flutter:
   assets:
     - .env
     - assets/images/
+
+  fonts:
+    - family: Titulo
+      fonts:
+        - asset: assets/fonts/DancingScript-VariableFont_wght.ttf

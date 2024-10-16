@@ -311,33 +311,38 @@ class _MovieDetails extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 10),
 
             // Géneros
-            SizedBox(
-              height: 40,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: [
-                  ...movie.genreIds.map((gender) {
-                    final colors = Theme.of(context).colorScheme;
-                    return Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 3),
-                      child: Chip(
-                        label: Text(gender),
-                        backgroundColor: colors.primary,
-                        labelStyle: TextStyle(color: colors.onPrimary),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                    );
-                  }),
-                ],
-              ),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final double chipWidth = 100;
+                final int chipsPerRow = (constraints.maxWidth / chipWidth).floor();
+                final int numRows = (movie.genreIds.length / chipsPerRow).ceil();
+            
+                return SizedBox(
+                  height: numRows > 1 ? 100 : 50, // Altura según el número de filas
+                  child: Wrap(
+                    spacing: 8.0, // Espacio horizontal entre los chips
+                    runSpacing: 3.0, // Espacio vertical entre las filas de chips
+                    children: [
+                      ...movie.genreIds.map((genre) {
+                        final colors = Theme.of(context).colorScheme;
+                        return Chip(
+                          label: Text(genre),
+                          backgroundColor: Colors.transparent,
+                          labelStyle: TextStyle(color: colors.primary),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                            side: BorderSide(color: colors.primary),
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
+                );
+              },
             ),
-
-            const SizedBox(height: 10),
 
             // Mostrar actores con título
             _ActorsByMovie(movieId: movie.id.toString()),
