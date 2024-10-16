@@ -13,8 +13,8 @@ class CustomAppbar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final colors = Theme.of(context).colorScheme;
     final titleStyle = Theme.of(context).textTheme.titleLarge;
+    final isDarkModeActivated = ref.watch(themeNotifierProvider).isDarkmode;
 
     return SafeArea(
       bottom: false,
@@ -25,12 +25,18 @@ class CustomAppbar extends ConsumerWidget {
           child: Row(
             children: [
 
-              // TODO: Cambiar por el logo de la app
-              Icon(Icons.movie_outlined, color: colors.primary, size: 28,),
+              IconButton(
+                icon: isDarkModeActivated 
+                ? const Icon(Icons.dark_mode_outlined)
+                : const Icon(Icons.light_mode_outlined),
+                onPressed: () {
+                  ref.read(themeNotifierProvider.notifier).toggleDarkmode();
+                },
+              ),
 
-              const SizedBox(width: 10),
+              const Spacer(),
               
-              Text('CineHub', style: titleStyle,),
+              Center(child: Text('CineHub', style: titleStyle,)),
 
               const Spacer(),
 

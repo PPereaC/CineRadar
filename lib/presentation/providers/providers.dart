@@ -12,3 +12,4 @@ export 'storage/local_storage_provider.dart';
 export 'storage/favorite_movies_provider.dart';
 export 'genres/genres_provider.dart';
 export 'genres/genres_repository_provider.dart';
+export 'theme/theme_provider.dart';
