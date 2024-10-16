@@ -1,5 +1,4 @@
-import 'package:cinehub/domain/entities/genre.dart';
-
+import '../entities/genre.dart';
 import '../entities/movie.dart';
 
 abstract class GenresRepository {

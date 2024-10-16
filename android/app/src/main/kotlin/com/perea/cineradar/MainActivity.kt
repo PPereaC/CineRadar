@@ -1,4 +1,4 @@
-package com.example.cinehub
+package com.perea.cineradar
 
 import io.flutter.embedding.android.FlutterActivity
 

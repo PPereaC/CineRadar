@@ -1,12 +1,11 @@
-import 'package:cinehub/config/constants/environment.dart';
-import 'package:cinehub/domain/datasources/movies_datasource.dart';
-import 'package:cinehub/domain/entities/movie.dart';
-
-import 'package:cinehub/infrastructure/mappers/movie_mapper.dart';
-import 'package:cinehub/infrastructure/models/moviedb/moviedb_response.dart';
 import 'package:dio/dio.dart';
 
+import '../../config/constants/environment.dart';
+import '../../domain/datasources/movies_datasource.dart';
+import '../../domain/entities/movie.dart';
+import '../mappers/movie_mapper.dart';
 import '../models/moviedb/movie_details.dart';
+import '../models/moviedb/moviedb_response.dart';
 
 class MoviedbDatasource extends MoviesDatasource {
   

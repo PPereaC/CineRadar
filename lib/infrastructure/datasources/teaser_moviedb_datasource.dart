@@ -1,9 +1,10 @@
-import 'package:cinehub/config/constants/environment.dart';
-import 'package:cinehub/domain/datasources/teasers_datasource.dart';
-import 'package:cinehub/domain/entities/teaser.dart';
-import 'package:cinehub/infrastructure/mappers/teaser_mapper.dart';
-import 'package:cinehub/infrastructure/models/moviedb/teaser_response.dart';
 import 'package:dio/dio.dart';
+
+import '../../config/constants/environment.dart';
+import '../../domain/datasources/teasers_datasource.dart';
+import '../../domain/entities/teaser.dart';
+import '../mappers/teaser_mapper.dart';
+import '../models/moviedb/teaser_response.dart';
 
 class TeaserMoviedbDatasource extends TeasersDatasource{
 

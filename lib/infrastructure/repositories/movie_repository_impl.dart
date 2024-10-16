@@ -1,6 +1,6 @@
-import 'package:cinehub/domain/datasources/movies_datasource.dart';
-import 'package:cinehub/domain/entities/movie.dart';
-import 'package:cinehub/domain/repositories/movies_repository.dart';
+import 'package:cineradar/domain/datasources/movies_datasource.dart';
+import 'package:cineradar/domain/entities/movie.dart';
+import 'package:cineradar/domain/repositories/movies_repository.dart';
 
 class MovieRepositoryImpl extends MoviesRepository {
 

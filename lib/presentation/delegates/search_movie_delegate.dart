@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:animate_do/animate_do.dart';
-import 'package:cinehub/config/helpers/human_formats.dart';
+import 'package:cineradar/config/helpers/human_formats.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 

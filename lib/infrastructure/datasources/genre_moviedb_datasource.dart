@@ -1,9 +1,9 @@
-import 'package:cinehub/config/constants/environment.dart';
-import 'package:cinehub/domain/entities/genre.dart';
-import 'package:cinehub/domain/entities/movie.dart';
 import 'package:dio/dio.dart';
 
+import '../../config/constants/environment.dart';
 import '../../domain/datasources/genres_datasource.dart';
+import '../../domain/entities/genre.dart';
+import '../../domain/entities/movie.dart';
 import '../mappers/movie_mapper.dart';
 import '../models/moviedb/categories_response.dart';
 import '../models/moviedb/moviedb_response.dart';

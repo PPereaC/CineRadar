@@ -1,6 +1,6 @@
-import 'package:cinehub/presentation/screens/screens.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../presentation/screens/screens.dart';
 import '../../presentation/views/views.dart';
 
 final appRouter = GoRouter(

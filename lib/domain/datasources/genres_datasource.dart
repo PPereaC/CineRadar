@@ -1,4 +1,4 @@
-import 'package:cinehub/domain/entities/genre.dart';
+import 'package:cineradar/domain/entities/genre.dart';
 
 import '../entities/movie.dart';
 

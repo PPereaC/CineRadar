@@ -1,6 +1,6 @@
-import 'package:cinehub/domain/datasources/actors_datasource.dart';
-import 'package:cinehub/domain/entities/actor.dart';
-import 'package:cinehub/domain/repositories/actors_repository.dart';
+import 'package:cineradar/domain/datasources/actors_datasource.dart';
+import 'package:cineradar/domain/entities/actor.dart';
+import 'package:cineradar/domain/repositories/actors_repository.dart';
 
 class ActorRepositoryImpl extends ActorsRepository{
 

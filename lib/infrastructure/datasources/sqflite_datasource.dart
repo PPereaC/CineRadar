@@ -1,8 +1,8 @@
-import 'package:cinehub/domain/datasources/local_storage_datasource.dart';
-import 'package:cinehub/domain/entities/movie.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
+import '../../domain/datasources/local_storage_datasource.dart';
+import '../../domain/entities/movie.dart';
 import '../mappers/movie_mapper.dart';
 
 class SQFliteDatasource extends LocalStorageDatasource {

@@ -1,9 +1,9 @@
-import 'package:cinehub/config/constants/environment.dart';
-import 'package:cinehub/domain/datasources/actors_datasource.dart';
-import 'package:cinehub/domain/entities/actor.dart';
-import 'package:cinehub/infrastructure/mappers/actor_mapper.dart';
 import 'package:dio/dio.dart';
 
+import '../../config/constants/environment.dart';
+import '../../domain/datasources/actors_datasource.dart';
+import '../../domain/entities/actor.dart';
+import '../mappers/actor_mapper.dart';
 import '../models/moviedb/credits_response.dart';
 
 class ActorMoviedbDatasource extends ActorsDatasource{

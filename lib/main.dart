@@ -1,12 +1,13 @@
-import 'package:cinehub/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
-import 'package:cinehub/config/router/app_router.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:cinehub/config/theme/app_theme.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_inappwebview_platform_interface/flutter_inappwebview_platform_interface.dart';
+
+import 'config/router/app_router.dart';
+import 'config/theme/app_theme.dart';
+import 'presentation/providers/providers.dart';
 
 // ignore: non_constant_identifier_names
 Future<void> main(dynamic InAppWebViewFlutterPlatform) async {

@@ -1,7 +1,7 @@
-import 'package:cinehub/domain/datasources/genres_datasource.dart';
-import 'package:cinehub/domain/entities/genre.dart';
-import 'package:cinehub/domain/entities/movie.dart';
-import 'package:cinehub/domain/repositories/genres_repository.dart';
+import 'package:cineradar/domain/datasources/genres_datasource.dart';
+import 'package:cineradar/domain/entities/genre.dart';
+import 'package:cineradar/domain/entities/movie.dart';
+import 'package:cineradar/domain/repositories/genres_repository.dart';
 
 class GenreRepositoryImpl extends GenresRepository{
 

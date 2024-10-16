@@ -1,6 +1,7 @@
-import 'package:cinehub/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../widgets/shared/custom_bottom_navigation.dart';
 
 class HomeScreen extends StatelessWidget {
 

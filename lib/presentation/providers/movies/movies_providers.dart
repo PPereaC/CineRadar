@@ -1,6 +1,7 @@
-import 'package:cinehub/domain/entities/movie.dart';
-import 'package:cinehub/presentation/providers/movies/movies_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../domain/entities/movie.dart';
+import '../providers.dart';
 
 final nowPlayingMoviesProvider = StateNotifierProvider<MoviesNotifier, List<Movie>>((ref) {
 

@@ -1,6 +1,6 @@
-import 'package:cinehub/domain/datasources/local_storage_datasource.dart';
-import 'package:cinehub/domain/entities/movie.dart';
-import 'package:cinehub/domain/repositories/local_storage_repository.dart';
+import 'package:cineradar/domain/datasources/local_storage_datasource.dart';
+import 'package:cineradar/domain/entities/movie.dart';
+import 'package:cineradar/domain/repositories/local_storage_repository.dart';
 
 class LocalStorageRepositoryImpl extends LocalStorageRepository {
 

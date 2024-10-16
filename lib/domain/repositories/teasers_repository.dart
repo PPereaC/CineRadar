@@ -1,4 +1,4 @@
-import 'package:cinehub/domain/entities/teaser.dart';
+import '../entities/teaser.dart';
 
 abstract class TeasersRepository {
 

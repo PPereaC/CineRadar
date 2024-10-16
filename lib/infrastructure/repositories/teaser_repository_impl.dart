@@ -1,6 +1,6 @@
-import 'package:cinehub/domain/datasources/teasers_datasource.dart';
-import 'package:cinehub/domain/entities/teaser.dart';
-import 'package:cinehub/domain/repositories/teasers_repository.dart';
+import 'package:cineradar/domain/datasources/teasers_datasource.dart';
+import 'package:cineradar/domain/entities/teaser.dart';
+import 'package:cineradar/domain/repositories/teasers_repository.dart';
 
 class TeaserRepositoryImpl extends TeasersRepository {
 

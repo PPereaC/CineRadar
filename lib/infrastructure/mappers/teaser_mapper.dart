@@ -1,5 +1,5 @@
-import 'package:cinehub/domain/entities/teaser.dart';
-import 'package:cinehub/infrastructure/models/moviedb/teaser_response.dart';
+import '../../domain/entities/teaser.dart';
+import '../models/moviedb/teaser_response.dart';
 
 class TeaserMapper {
 

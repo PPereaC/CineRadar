@@ -1,7 +1,6 @@
-import 'package:cinehub/domain/entities/movie.dart';
-import 'package:cinehub/infrastructure/models/moviedb/movie_moviedb.dart';
-
+import '../../domain/entities/movie.dart';
 import '../models/moviedb/movie_details.dart';
+import '../models/moviedb/movie_moviedb.dart';
 
 class MovieMapper {
 

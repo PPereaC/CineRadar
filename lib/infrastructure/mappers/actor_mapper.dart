@@ -1,5 +1,5 @@
-import 'package:cinehub/domain/entities/actor.dart';
-import 'package:cinehub/infrastructure/models/moviedb/credits_response.dart';
+import '../../domain/entities/actor.dart';
+import '../models/moviedb/credits_response.dart';
 
 class ActorMapper {
 
