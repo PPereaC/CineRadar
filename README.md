@@ -8,3 +8,8 @@
 ```
 flutter pub run build_runner build
 ```
+
+- Comando para sacar el Android App Bundle (AAB):
+```
+flutter build appbundle
+```

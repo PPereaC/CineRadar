@@ -1,7 +1,7 @@
 name: cineradar
 description: "CineRadar es una aplicación que proporciona información detallada sobre películas, incluyendo géneros, sinopsis, trailers y más. Descubre nuevas películas y mantente al día con las últimas novedades del cine."
 publish_to: 'none'
-version: 0.2.0
+version: 0.2.0+3
 
 environment:
   sdk: ^3.5.2
